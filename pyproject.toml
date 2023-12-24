@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ctool"
+version = "0.0.1"
+authors = [
+    { name = "Timothy Brackett", email="brackett.tc@gmail.com" },
+    ]
+description = "A CMake wrapper and toolset"
+keywords = [
+    "cmake"
+    ]
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">= 3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: POSIX :: Linux",
+    "Development Status :: 1 - Planning",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: The Unlicense (Unlicense)",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Testing",
+    ]
+
+[project.scripts]
+ctool = "ctool:main"
+
+[project.urls]
+Homepage = "https://github.com/bracketttc/ctool"
+Issues = "https://github.com/bracketttc/ctool/issues"
