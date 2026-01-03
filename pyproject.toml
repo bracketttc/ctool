@@ -24,10 +24,11 @@ classifiers = [
     "Topic :: Software Development :: Testing",
     ]
 
-dynamic = ["version"]
+dynamic = ["version", "dependencies"]
 
 [tool.setuptools.dynamic]
 version = { attr = "ctool.__version__.VERSION" }
+dependencies = { file = ["requirements.txt"] }
 
 [project.scripts]
 ctool = "ctool:main"
