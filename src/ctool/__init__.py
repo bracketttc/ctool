@@ -2,14 +2,12 @@
 ctool
 """
 
-from difflib import get_close_matches
-from shutil import which
 import glob
 import os
 import subprocess
 import sys
-
-from .util import remove_prefix
+from difflib import get_close_matches
+from shutil import which
 
 
 def find_commands():
@@ -27,7 +25,7 @@ def find_commands():
         results += glob.glob(os.path.join(glob.escape(path_dir), "ctool-*"))
 
     commands = [
-        remove_prefix(os.path.basename(result), "ctool-")
+        os.path.basename(result).removeprefix("ctool-")
         for result in results
         if os.access(result, os.X_OK | os.R_OK)
     ]
