@@ -50,7 +50,7 @@ def main():
     """
     ctool entry-point
     """
-    if len(sys.argv) == 1:
+    if len(sys.argv) == 1 or sys.argv[1] == "--help":
         print_usage()
         return 0
 

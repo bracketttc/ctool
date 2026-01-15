@@ -8,23 +8,26 @@ import pathlib
 from cachetools import cached
 
 
-@cached
+@cached(cache={})
 def get_cache(binary_dir: pathlib.Path) -> configparser.SectionProxy:
     """
     Read the CMake cache from a binary directory
     """
 
-    cache = configparser.ConfigParser(
+    cmake_cache = configparser.ConfigParser(
         delimiters=("="), comment_prefixes=("#", "//"), interpolation=None
     )
-    cache.optionxform = lambda option: option.split(":")[0]
+    # Strip off the CMake variable types from the names
+    cmake_cache.optionxform = lambda optionstr: optionstr.split(":")[0]  # type: ignore
 
+    # Prefix CMakeCache.txt with a heading to make it parsable by configparser
     with (binary_dir / "CMakeCache.txt").open("r") as cache_file:
-        cache.read_string("[cache]\n" + cache_file.read())
+        cmake_cache.read_string("[cache]\n" + cache_file.read())
 
     # Remove internal-use-only special keys
-    for key in cache['cache'].keys():
+    for key in cmake_cache["cache"].keys():
         if key.endswith("-ADVANCED") or key.endswith("-STRINGS"):
-            cache.remove_option('cache', key)
+            cmake_cache.remove_option("cache", key)
 
-    return cache["cache"]
+    # Return the CMake cache (without exposing our fake section heading)
+    return cmake_cache["cache"]

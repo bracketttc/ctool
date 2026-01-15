@@ -30,9 +30,31 @@ dynamic = ["version", "dependencies"]
 version = { attr = "ctool.__version__.VERSION" }
 dependencies = { file = ["requirements.txt"] }
 
+[project.optional-dependencies]
+# development dependencies
+test = [
+    "pytest",
+    ]
+
 [project.scripts]
 ctool = "ctool:main"
+ctool-depends = "ctool.depends:main"
+ctool-changed-tests = "ctool.changed_tests:main"
 
 [project.urls]
 Homepage = "https://github.com/bracketttc/ctool"
 Issues = "https://github.com/bracketttc/ctool/issues"
+
+#[tool.setuptools.package-data]
+#"ctool" = ["py.typed"]
+
+#[tool.setuptools.packages.find]
+#where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+    ]
+
+[tool.coverage.report]
+omit = ["tests/*"]

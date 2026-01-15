@@ -309,3 +309,10 @@ $RECYCLE.BIN/
 
 # Coverage report
 /coverage.json
+
+# RPM build tree
+/BUILD
+/BUILDROOT
+/RPMS
+/SOURCES
+/SRPMS
